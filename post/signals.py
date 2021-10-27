@@ -1,6 +1,6 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save,post_delete
 from django.dispatch import receiver
-from .models import Post
+from .models import Post, Likes
 
 @receiver(pre_save, sender=Post)
 def post_likes_changed(sender, instance, **kwargs): 

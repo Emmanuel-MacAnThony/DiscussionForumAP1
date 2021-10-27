@@ -22,6 +22,7 @@ class Post(TimeStampedModel):
     body = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     total_likes = models.PositiveIntegerField(default=0, blank=True)
+    description = models.TextField(blank=True, default=" ", max_length=850)
    
     
     def __str__(self) -> str:
@@ -30,7 +31,10 @@ class Post(TimeStampedModel):
 class Likes(TimeStampedModel): 
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes', null=True, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
-   
+    
+    class Meta: 
+        unique_together = ('author', 'post')
+    
     
     
     def __str__(self) -> str:

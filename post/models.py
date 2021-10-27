@@ -21,19 +21,17 @@ class Post(TimeStampedModel):
     title = models.CharField(max_length=250)
     body = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    total_likes = models.PositiveIntegerField(default=0, blank=True)
    
     
     def __str__(self) -> str:
         return self.title
     
-    @property
-    def total_likes(self) -> int:
-        return self.likes.all().count()
-    
 class Likes(TimeStampedModel): 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes', null=True, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
-    status = models.BooleanField(default=False)
+   
+    
     
     def __str__(self) -> str:
         return str(self.author)

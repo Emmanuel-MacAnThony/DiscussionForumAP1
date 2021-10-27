@@ -52,6 +52,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    
+    #Third-party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth',
+    'rest_auth.registration',
+    
+    #project apps
+    'post.apps.PostConfig',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -149,3 +164,14 @@ os.path.join(BASE_DIR, 'locale'),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#REST_FRAMEWORK
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication', 
+        ],
+}
+
+SITE_ID = 1
